@@ -165,7 +165,7 @@
         const shouldCloseFromClick = (target) =>
           wrapper.contains(target) &&
           !target.closest(".action-menu") &&
-          target !== fab;
+          !target.closest(".fab");
 
         document.addEventListener("click", (event) => {
           if (
