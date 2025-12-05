@@ -162,18 +162,17 @@
           }
         });
 
-        const shouldCloseFromClick = (target) =>
-          wrapper.contains(target) &&
-          !target.closest(".action-menu") &&
-          !target.closest(".fab");
-
         document.addEventListener("click", (event) => {
+          if (!wrapper.classList.contains("menu-open")) return;
+
           if (
-            wrapper.classList.contains("menu-open") &&
-            shouldCloseFromClick(event.target)
+            event.target.closest(".action-menu") ||
+            event.target.closest(".fab")
           ) {
-            closeMenu();
+            return;
           }
+
+          closeMenu();
         });
 
         document.querySelectorAll(".nav-item").forEach((btn) => {
