@@ -14,7 +14,7 @@ body {
   font-family: "SF Pro Display", "Inter", "Segoe UI", system-ui, -apple-system,
     sans-serif;
   background: var(--bg-color);
-  color: #fff;
+  color: #505050;
 }
 
 .screen {
@@ -22,19 +22,22 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
 }
 
 .menu-wrapper {
   position: relative;
-  width: min(380px, calc(100% - 32px));
+  width: 100%;
   display: flex;
   justify-content: center;
+
+  box-sizing: border-box;
   z-index: 0;
 }
 
 .bottom-nav {
-  width: 100%;
+  width: min(900px, 100%);
+  min-width: 320px;
   background: var(--card-color);
   border-radius: 16px;
   height: 54px;
@@ -42,7 +45,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 120px;
+  gap: 64px;
   position: relative;
   z-index: 2;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
@@ -67,7 +70,8 @@ body {
   top: -200px;
   left: 50%;
   transform: translateX(-50%);
-  width: 100%;
+  width: min(900px, 100%);
+  min-width: 320px;
   height: 200px;
   pointer-events: none;
   opacity: 0;
@@ -166,7 +170,8 @@ body {
 }
 
 .nav-item {
-  flex: 1;
+  flex: 0 0 48px;
+  width: 48px;
   background: none;
   border: none;
   display: flex;
@@ -174,7 +179,7 @@ body {
   align-items: center;
   gap: 6px;
   font-size: 10px;
-  color: inherit;
+  color: #ffffff;
   padding: 4px 4px;
   cursor: pointer;
   font-weight: 500;
@@ -183,10 +188,42 @@ body {
 
 .nav-group {
   flex: 1;
-  display: flex;
-  gap: 16px;
-  justify-content: space-between;
   min-width: 0;
+}
+
+.nav-track {
+  display: flex;
+  gap: 12px;
+  justify-content: space-evenly;
+  padding: 4px 0;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.nav-track::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-track .nav-item {
+  scroll-snap-align: center;
+}
+
+.scroll-hint {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 16px;
+  color: #505050;
+}
+
+.scroll-hint span:first-child,
+.scroll-hint span:last-child {
+  font-size: 22px;
+  color: #505050;
 }
 
 .nav-item:focus-visible {
@@ -251,6 +288,7 @@ body {
 
 .menu-open:not(.menu-closing) .fab-symbol {
   transform: rotate(45deg);
+  scale: 0.7;
 }
 
 .menu-open:not(.menu-closing) .fab {
@@ -292,10 +330,25 @@ body {
 
 @media (max-width: 420px) {
   .bottom-nav {
-    padding: 18px 24px;
+    padding: 0 8px;
+    gap: 16px;
   }
 
   .nav-item {
-    font-size: 16px;
+    font-size: 10px;
+  }
+
+  .scroll-hint {
+    display: flex;
+    margin-top: 30px;
+    font-size: 12px;
+    width: 64px;
+    color: #505050;
+  }
+
+  .scroll-hint span:first-child,
+  .scroll-hint span:last-child {
+    font-size: 20px;
+    color: #505050;
   }
 }
