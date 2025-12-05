@@ -19,7 +19,7 @@
                   aria-hidden="true"
                   class="icon"
                 />
-                <span>Головна</span>
+                <span>Home</span>
               </button>
               <button class="nav-item">
                 <img
@@ -28,7 +28,7 @@
                   aria-hidden="true"
                   class="icon"
                 />
-                <span>Клієнти</span>
+                <span>Clients</span>
               </button>
               <button class="nav-item">
                 <img
@@ -37,7 +37,7 @@
                   aria-hidden="true"
                   class="icon"
                 />
-                <span>Послуги</span>
+                <span>Services</span>
               </button>
             </div>
           </div>
@@ -55,7 +55,7 @@
                   aria-hidden="true"
                   class="icon"
                 />
-                <span>Магазин</span>
+                <span>Store</span>
               </button>
               <button class="nav-item">
                 <img
@@ -64,7 +64,7 @@
                   aria-hidden="true"
                   class="icon"
                 />
-                <span>Фінанси</span>
+                <span>Finance</span>
               </button>
               <button class="nav-item">
                 <img
@@ -73,7 +73,7 @@
                   aria-hidden="true"
                   class="icon"
                 />
-                <span>Налаштування</span>
+                <span>Settings</span>
               </button>
             </div>
           </div>
@@ -160,6 +160,28 @@
           } else {
             openMenu();
           }
+        });
+
+        const shouldCloseFromClick = (target) =>
+          wrapper.contains(target) &&
+          !target.closest(".action-menu") &&
+          target !== fab;
+
+        document.addEventListener("click", (event) => {
+          if (
+            wrapper.classList.contains("menu-open") &&
+            shouldCloseFromClick(event.target)
+          ) {
+            closeMenu();
+          }
+        });
+
+        document.querySelectorAll(".nav-item").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            if (wrapper.classList.contains("menu-open")) {
+              closeMenu();
+            }
+          });
         });
       }
     </script>
