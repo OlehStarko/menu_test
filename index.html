@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Мобільне меню</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="screen">
+      <div class="menu-wrapper">
+        <nav class="bottom-nav" aria-label="Головне меню">
+          <div class="nav-group">
+            <button class="nav-item">
+              <img
+                src="icons/home-2.svg"
+                alt=""
+                aria-hidden="true"
+                class="icon"
+              />
+              <span>Головна</span>
+            </button>
+            <button class="nav-item">
+              <img
+                src="icons/user-square.svg"
+                alt=""
+                aria-hidden="true"
+                class="icon"
+              />
+              <span>Клієнти</span>
+            </button>
+          </div>
+          <div class="nav-group">
+            <button class="nav-item">
+              <img
+                src="icons/note.svg"
+                alt=""
+                aria-hidden="true"
+                class="icon"
+              />
+              <span>Записи</span>
+            </button>
+            <button class="nav-item">
+              <img
+                src="icons/more-square.svg"
+                alt=""
+                aria-hidden="true"
+                class="icon"
+              />
+              <span>Ще</span>
+            </button>
+          </div>
+        </nav>
+        <div class="action-menu" aria-hidden="true">
+          <div class="action-inner">
+            <div class="action-slot">
+              <button class="action-btn">
+                <img
+                  src="icons/note.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="icon"
+                />
+                <span>Запис</span>
+              </button>
+            </div>
+            <div class="action-slot">
+              <button class="action-btn">
+                <img
+                  src="icons/user-square.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="icon"
+                />
+                <span>Клієнт</span>
+              </button>
+            </div>
+            <div class="action-slot">
+              <button class="action-btn">
+                <img
+                  src="icons/more-square.svg"
+                  alt=""
+                  aria-hidden="true"
+                  class="icon"
+                />
+                <span>Послуга</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="fab" aria-label="Створити" aria-expanded="false">
+          <span class="fab-symbol"></span>
+        </button>
+      </div>
+    </div>
+    <script>
+      const wrapper = document.querySelector(".menu-wrapper");
+      const fab = document.querySelector(".fab");
+      const CLOSE_DURATION = 500;
+
+      if (wrapper && fab) {
+        let closingTimeout;
+
+        const setExpanded = (state) =>
+          fab.setAttribute("aria-expanded", String(state));
+
+        const openMenu = () => {
+          clearTimeout(closingTimeout);
+          wrapper.classList.add("menu-open");
+          wrapper.classList.remove("menu-closing");
+          setExpanded(true);
+        };
+
+        const closeMenu = () => {
+          if (!wrapper.classList.contains("menu-open")) return;
+          wrapper.classList.add("menu-closing");
+          setExpanded(false);
+          clearTimeout(closingTimeout);
+          closingTimeout = setTimeout(() => {
+            wrapper.classList.remove("menu-closing");
+            wrapper.classList.remove("menu-open");
+          }, CLOSE_DURATION);
+        };
+
+        fab.addEventListener("click", () => {
+          const isFullyOpen =
+            wrapper.classList.contains("menu-open") &&
+            !wrapper.classList.contains("menu-closing");
+
+          if (isFullyOpen) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
